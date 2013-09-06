@@ -1,0 +1,14 @@
+{
+	"name": "Quiz App",
+	"version": "0.0.1",
+	"dependencies": {
+	},
+	"jam": {
+		"dependencies": {
+			"jquery": "<2.0",
+			"underscore": null,
+			"backbone": null,
+			"backbone.marionette": null
+		}
+	}
+}
