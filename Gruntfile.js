@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
-      files: ['js/*.js']
+      files: ['js/**/*.js']
     },
     sass: {
       dist: {
@@ -10,6 +10,16 @@ module.exports = function(grunt) {
         },
         files: {
           'css/main.css': 'scss/main.scss'  
+        }
+      }
+    },
+    requirejs: {
+      compile: {
+        options: {
+          name: "main",
+          baseUrl: "js/",
+          mainConfigFile: "js/main.js",
+          out: "js/dist/built.min.js"
         }
       }
     },
@@ -27,5 +37,6 @@ module.exports = function(grunt) {
   
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-watch');
 };
