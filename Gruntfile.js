@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
-      files: ['js/**/*.js']
+      files: ['public/js/**/*.js', '!public/js/main.min.js', '!public/js/libs/**/*']
     },
     sass: {
       dist: {
@@ -9,23 +9,25 @@ module.exports = function(grunt) {
           style: 'compressed'  
         },
         files: {
-          'css/main.css': 'scss/main.scss'  
+          'public/css/style.min.css': 'scss/main.scss'  
         }
       }
     },
+    
     requirejs: {
       compile: {
         options: {
           name: "main",
-          baseUrl: "js/",
-          mainConfigFile: "js/main.js",
-          out: "js/dist/built.min.js"
+          baseUrl: "public/js/",
+          mainConfigFile: "public/js/main.js",
+          out: "public/js/main.min.js"
         }
       }
     },
+    
     watch: {
       css: {
-        files: '**/*.scss',
+        files: 'scss/*.scss',
         tasks: ['sass']
       },
       js: {
