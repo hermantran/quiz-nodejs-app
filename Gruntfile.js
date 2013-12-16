@@ -3,13 +3,14 @@ module.exports = function(grunt) {
     jshint: {
       files: ['public/js/**/*.js', '!public/js/main.min.js', '!public/js/libs/**/*']
     },
+    
     sass: {
       dist: {
         options: {
           style: 'compressed'  
         },
         files: {
-          'public/css/style.min.css': 'scss/main.scss'  
+          'public/css/style.min.css': 'public/scss/main.scss'  
         }
       }
     },
@@ -27,7 +28,7 @@ module.exports = function(grunt) {
     
     watch: {
       css: {
-        files: 'scss/*.scss',
+        files: 'public/scss/*.scss',
         tasks: ['sass']
       },
       js: {
