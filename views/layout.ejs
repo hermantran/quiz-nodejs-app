@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--
+        For demonstration purposes, the `title` is dynamically set here based on
+        your `sails.config.appName` to show that you can inject data into layouts
+        exactly the same way as with your other view templates.
+    -->
+    <title><%- title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel="stylesheet" href="/styles/dist/main.min.css">
+  </head>
+
+  <body>
+
+    <!-- Include the view file for the current controller/route -->
+    <%- body %>
+
+    <!-- Bring in the socket.io client -->
+    <script src="/js/socket.io.js"></script>
+    <!-- then beef it up with some convenience logic for talking to Sails.js -->
+    <script src="/js/sails.io.js"></script>
+
+    <script src="/js/dist/main.min.js"></script>
+    </body>
+</html>
