@@ -7,74 +7,60 @@
  * Feel free to change none, some, or ALL of this file to fit your needs!
  */
 
-(function() {
-  var $ = require('jquery');
-  var _ = require('underscore');
-  var Backbone = require('backbone');
-  Backbone.$ = $;
-  require('backbone.marionette');
-
-  var App = new Backbone.Marionette.Application();
-    
-  App.on('initialize:after', function() {
-    console.log('Marionette ready!', Backbone.Marionette);
-  });
-
-  App.start(); 
-})();
-
-(function (io) {
-
-  // as soon as this file is loaded, connect automatically, 
-  var socket = io.connect();
-  if (typeof console !== 'undefined') {
-    log('Connecting to Sails.js...');
-  }
-
-  socket.on('connect', function socketConnected() {
-
-    // Listen for Comet messages from Sails
-    socket.on('message', function messageReceived(message) {
-
-      ///////////////////////////////////////////////////////////
-      // Replace the following with your own custom logic
-      // to run when a new message arrives from the Sails.js
-      // server.
-      ///////////////////////////////////////////////////////////
-      log('New comet message received :: ', message);
-      //////////////////////////////////////////////////////
-
-    });
+var $ = require('jquery');
+var _ = require('underscore');
+var Backbone = require('backbone');
+Backbone.$ = $;
+var Marionette = require('backbone.marionette');
+var io = require('./sails.io.js');
 
 
-    ///////////////////////////////////////////////////////////
-    // Here's where you'll want to add any custom logic for
-    // when the browser establishes its socket connection to 
-    // the Sails.js server.
-    ///////////////////////////////////////////////////////////
-    log(
-        'Socket is now connected and globally accessible as `socket`.\n' + 
-        'e.g. to send a GET request to Sails, try \n' + 
-        '`socket.get("/", function (response) ' +
-        '{ console.log(response); })`'
-    );
-    ///////////////////////////////////////////////////////////
-
-
-  });
-
-
-  // Expose connected `socket` instance globally so that it's easy
-  // to experiment with from the browser console while prototyping.
-  window.socket = socket;
-
-
-  // Simple log function to keep the example simple
-  function log () {
-    if (typeof console !== 'undefined') {
-      console.log.apply(console, arguments);
-    }
-  }
+var App = new Marionette.Application();
   
+App.on('initialize:after', function() {
+  console.log('Marionette ready!', Marionette);
+});
 
-})(window.io);
+App.start(); 
+
+
+// as soon as this file is loaded, connect automatically, 
+var socket = io.connect();
+if (typeof console !== 'undefined') {
+  log('Connecting to Sails.js...');
+}
+
+socket.on('connect', function socketConnected() {
+
+  // Listen for Comet messages from Sails
+  socket.on('message', function messageReceived(message) {
+
+    ///////////////////////////////////////////////////////////
+    // Replace the following with your own custom logic
+    // to run when a new message arrives from the Sails.js
+    // server.
+    ///////////////////////////////////////////////////////////
+    console.log('New comet message received :: ', message);
+    //////////////////////////////////////////////////////
+
+  });
+
+
+  ///////////////////////////////////////////////////////////
+  // Here's where you'll want to add any custom logic for
+  // when the browser establishes its socket connection to 
+  // the Sails.js server.
+  ///////////////////////////////////////////////////////////
+  console.log(
+      'Socket is now connected and globally accessible as `socket`.\n' + 
+      'e.g. to send a GET request to Sails, try \n' + 
+      '`socket.get("/", function (response) ' +
+      '{ console.log(response); })`'
+  );
+  ///////////////////////////////////////////////////////////
+
+});
+
+// Expose connected `socket` instance globally so that it's easy
+// to experiment with from the browser console while prototyping.
+window.socket = socket;

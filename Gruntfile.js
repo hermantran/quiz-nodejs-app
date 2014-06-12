@@ -14,9 +14,14 @@ module.exports = function(grunt) {
     },
     
     clean: {
-      dist: [
-        '.tmp/public/styles/scss/'
-      ]
+      dist: {
+        src: [
+          '.tmp/public/styles/*',
+          '.tmp/public/js/*',
+          '!.tmp/public/styles/dist/**',
+          '!.tmp/public/js/dist/**'
+        ]
+      }
     },
     
     jshint: {
@@ -45,7 +50,15 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          'assets/js/dist/main.min.js': ['assets/js/app.js']
+          'assets/js/dist/main.js': ['assets/js/app.js']
+        }
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          'assets/js/dist/main.min.js': ['assets/js/dist/main.js']
         }
       }
     },
@@ -68,10 +81,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   
   grunt.registerTask('buildJs', [
     'jshint:files', 
     'browserify:dist',
+    'uglify:dist',
     'copy:dist'
   ]);
 

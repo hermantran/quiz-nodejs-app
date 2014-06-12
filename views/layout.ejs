@@ -14,15 +14,9 @@
   </head>
 
   <body>
+      <!-- Include the view file for the current controller/route -->
+      <%- body %>
 
-    <!-- Include the view file for the current controller/route -->
-    <%- body %>
-
-    <!-- Bring in the socket.io client -->
-    <script src="/js/socket.io.js"></script>
-    <!-- then beef it up with some convenience logic for talking to Sails.js -->
-    <script src="/js/sails.io.js"></script>
-
-    <script src="/js/dist/main.min.js"></script>
+      <script src="/js/dist/main.min.js"></script>
     </body>
 </html>
