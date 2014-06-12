@@ -10,7 +10,8 @@
     "optimist": "0.3.4",
     "jquery": "~1.11.1",
     "backbone": "~1.1.2",
-    "backbone.marionette": "~1.8.7"
+    "backbone.marionette": "~1.8.7",
+    "underscore": "~1.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

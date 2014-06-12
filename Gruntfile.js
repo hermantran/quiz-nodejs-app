@@ -4,11 +4,11 @@ module.exports = function(grunt) {
       dist: {
         files: [
           {
-          expand: true,
-          cwd: './assets',
-          src: ['**/*.!(coffee)'],
-          dest: '.tmp/public'
-        }
+            expand: true,
+            cwd: './assets',
+            src: ['**/*.!(coffee)'],
+            dest: '.tmp/public'
+          }
         ]
       }
     },
@@ -71,13 +71,13 @@ module.exports = function(grunt) {
   
   grunt.registerTask('buildJs', [
     'jshint:files', 
-    'browserify:dist'
+    'browserify:dist',
+    'copy:dist'
   ]);
 
   grunt.registerTask('compileAssets', [
     'sass:dist',
     'buildJs',
-    'copy:dist',
     'clean:dist'
   ]);
     

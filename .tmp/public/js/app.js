@@ -7,6 +7,21 @@
  * Feel free to change none, some, or ALL of this file to fit your needs!
  */
 
+(function() {
+  var $ = require('jquery');
+  var _ = require('underscore');
+  var Backbone = require('backbone');
+  Backbone.$ = $;
+  require('backbone.marionette');
+
+  var App = new Backbone.Marionette.Application();
+    
+  App.on('initialize:after', function() {
+    console.log('Marionette ready!', Backbone.Marionette);
+  });
+
+  App.start(); 
+})();
 
 (function (io) {
 
@@ -62,10 +77,4 @@
   }
   
 
-})(
-
-  // In case you're wrapping socket.io to prevent pollution of the global namespace,
-  // you can replace `window.io` with your own `io` here:
-  window.io
-
-);
+})(window.io);
