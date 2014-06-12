@@ -1,11 +1,31 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+    copy: {
+      dist: {
+        files: [
+          {
+          expand: true,
+          cwd: './assets',
+          src: ['**/*.!(coffee)'],
+          dest: '.tmp/public'
+        }
+        ]
+      }
+    },
+    
+    clean: {
+      dist: [
+        '.tmp/public/styles/scss/'
+      ]
+    },
+    
     jshint: {
       files: [
         '**/*.js',
         '!.tmp/**/*.js',
         '!node_modules/**/*.js',
-        '!assets/js/lib/**/*',
+        '!assets/js/dist/**/*.js',
+        '!assets/js/lib/**/*.js',
         '!assets/js/sails.io.js',
         '!assets/js/socket.io.js'
       ]
@@ -17,7 +37,7 @@ module.exports = function(grunt) {
           style: 'compressed'  
         },
         files: {
-          '.tmp/public/styles/main.min.css': 'assets/styles/scss/main.scss'  
+          'assets/styles/dist/main.min.css': 'assets/styles/scss/main.scss'  
         }
       }
     },
@@ -25,7 +45,7 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          '.tmp/public/js/main.js': ['assets/js/app.js']
+          'assets/js/dist/main.min.js': ['assets/js/app.js']
         }
       }
     },
@@ -46,7 +66,22 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
   
-  grunt.registerTask('buildJs', ['jshint', 'browserify']);
-  grunt.registerTask('default', ['buildJs', 'sass']);
+  grunt.registerTask('buildJs', [
+    'jshint:files', 
+    'browserify:dist'
+  ]);
+
+  grunt.registerTask('compileAssets', [
+    'sass:dist',
+    'buildJs',
+    'copy:dist',
+    'clean:dist'
+  ]);
+    
+  grunt.registerTask('default', [
+    'compileAssets'
+  ]);
 };
