@@ -1,2 +1,7 @@
 # quiz-nodejs-app
-### a Sails application
+### Setup
+
+```
+  heroku labs:enable websockets -a myapp
+  git push heroku master
+```
