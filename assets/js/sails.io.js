@@ -16,6 +16,8 @@
  * http://sailsjs.org/#documentation
  */
 
+var io = require('./socket.io.js');
+
 (function (io) {
 
 
@@ -153,14 +155,6 @@
 
     });
   }
-  
+})(io);
 
-
-
-}) (
-
-  // In case you're wrapping socket.io to prevent pollution of the global namespace,
-  // you can replace `window.io` with your own `io` here:
-  window.io
-
-);
+module.exports = io;
