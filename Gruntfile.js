@@ -25,14 +25,16 @@ module.exports = function(grunt) {
     },
     
     jshint: {
+      options: {
+        jshintrc: '.jshintrc'
+      },
       files: [
         '**/*.js',
         '!.tmp/**/*.js',
         '!node_modules/**/*.js',
         '!assets/js/dist/**/*.js',
-        '!assets/js/lib/**/*.js',
-        '!assets/js/sails.io.js',
-        '!assets/js/socket.io.js'
+        '!assets/js/socket.io.js',
+        '!assets/js/sails.io.js'
       ]
     },
     
